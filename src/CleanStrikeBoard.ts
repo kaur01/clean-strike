@@ -46,4 +46,13 @@ export class CleanStrikeBoard {
     strikerStrike(): number {
         return -1;
     }
+
+    defunctStrike(): number {
+        if (this._blackCoins === 0) {
+            return 0;
+        }
+        this._blackCoins = this._blackCoins - 1;
+        return -2;
+    }
+
 }

@@ -73,5 +73,22 @@ class CleanStrikeBoardSpec {
 
         expect(result).to.equal(-1);
     }
+
+    @test
+    public async shouldReduceTheNumberOfBlackCoinWhenEncounteredADefunctCoin(): Promise<void> {
+        const result = this.cleanStrikeBoard.defunctStrike();
+
+        expect(result).to.equal(-2);
+        expect(this.cleanStrikeBoard.blackCoins).to.equal(8);
+    }
+
+    @test
+    public async shouldReturnZeroWhenNoBlackCoinsPresentForDefunctStrike(): Promise<void> {
+        this.cleanStrikeBoard.blackCoins = 0;
+
+        const result = this.cleanStrikeBoard.defunctStrike();
+
+        expect(result).to.equal(0);
+    }
 }
 
