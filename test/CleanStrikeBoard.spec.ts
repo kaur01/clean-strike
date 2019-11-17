@@ -28,5 +28,23 @@ class CleanStrikeBoardSpec {
         expect(result).to.equal(0);
     }
 
+    @test
+    public async shouldReduceTheNumberOfBlackCoinsByTwo(): Promise<void> {
+        this.cleanStrikeBoard.blackCoins = 6;
+
+        const result = this.cleanStrikeBoard.multiStrike();
+
+        expect(result).to.equal(2);
+        expect(this.cleanStrikeBoard.blackCoins).to.equal(4);
+    }
+
+    @test
+    public async shouldReturnZeroWhenNoBlackCoinsPresentForMultiStrike(): Promise<void> {
+        this.cleanStrikeBoard.blackCoins = 0;
+
+        const result = this.cleanStrikeBoard.multiStrike();
+
+        expect(result).to.equal(0);
+    }
 }
 

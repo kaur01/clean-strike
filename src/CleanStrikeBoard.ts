@@ -27,4 +27,12 @@ export class CleanStrikeBoard {
         return 1;
     }
 
+    multiStrike(): number {
+        if (this._blackCoins === 0) {
+            return 0;
+        }
+        this._blackCoins = this._blackCoins - 2;
+        return 2;
+    }
+
 }
