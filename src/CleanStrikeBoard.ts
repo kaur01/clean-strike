@@ -19,5 +19,12 @@ export class CleanStrikeBoard {
         this._redCoins = value;
     }
 
+    strike(): number {
+        if (this._blackCoins === 0) {
+            return 0;
+        }
+        this._blackCoins = this._blackCoins - 1;
+        return 1;
+    }
 
 }
