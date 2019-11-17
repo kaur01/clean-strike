@@ -66,5 +66,12 @@ class CleanStrikeBoardSpec {
 
         expect(result).to.equal(0);
     }
+
+    @test
+    public async shouldReturnNegativeOneWhenTheStrikerIsInThePocket(): Promise<void> {
+        const result = this.cleanStrikeBoard.strikerStrike();
+
+        expect(result).to.equal(-1);
+    }
 }
 

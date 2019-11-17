@@ -43,4 +43,7 @@ export class CleanStrikeBoard {
         return 3;
     }
 
+    strikerStrike(): number {
+        return -1;
+    }
 }
