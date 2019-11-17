@@ -1,92 +1,92 @@
 import {expect} from 'chai';
 import {suite, test} from 'mocha-typescript';
-import {CleanStrikeBoard} from "../src/CleanStrikeBoard";
+import {Board} from "../src/Board";
 
 @suite
-class CleanStrikeBoardSpec {
-    private cleanStrikeBoard: CleanStrikeBoard;
+class BoardSpec {
+    private board: Board;
 
     public before(): void {
-        this.cleanStrikeBoard = new CleanStrikeBoard(9,1);
+        this.board = new Board(9,1);
     }
 
     @test
     public async shouldReduceTheNumberOfBlackCoinsOnStrikeOnlyIfBlackCoinsPresent(): Promise<void> {
 
-        const result = this.cleanStrikeBoard.strike();
+        const result = this.board.strike();
 
         expect(result).to.equal(1);
-        expect(this.cleanStrikeBoard.blackCoins).to.equal(8);
+        expect(this.board.blackCoins).to.equal(8);
     }
 
     @test
     public async shouldReturnZeroWhenNoBlackCoinsPresentForStrike(): Promise<void> {
-        this.cleanStrikeBoard.blackCoins = 0;
+        this.board.blackCoins = 0;
 
-        const result = this.cleanStrikeBoard.strike();
+        const result = this.board.strike();
 
         expect(result).to.equal(0);
     }
 
     @test
     public async shouldReduceTheNumberOfBlackCoinsByTwo(): Promise<void> {
-        this.cleanStrikeBoard.blackCoins = 6;
+        this.board.blackCoins = 6;
 
-        const result = this.cleanStrikeBoard.multiStrike();
+        const result = this.board.multiStrike();
 
         expect(result).to.equal(2);
-        expect(this.cleanStrikeBoard.blackCoins).to.equal(4);
+        expect(this.board.blackCoins).to.equal(4);
     }
 
     @test
     public async shouldReturnZeroWhenNoBlackCoinsPresentForMultiStrike(): Promise<void> {
-        this.cleanStrikeBoard.blackCoins = 0;
+        this.board.blackCoins = 0;
 
-        const result = this.cleanStrikeBoard.multiStrike();
+        const result = this.board.multiStrike();
 
         expect(result).to.equal(0);
     }
 
     @test
     public async shouldReduceTheNumberOfRedCoinToZeroWhenRedStrike(): Promise<void> {
-        this.cleanStrikeBoard.redCoins = 1;
+        this.board.redCoins = 1;
 
-        const result = this.cleanStrikeBoard.redStrike();
+        const result = this.board.redStrike();
 
         expect(result).to.equal(3);
-        expect(this.cleanStrikeBoard.redCoins).to.equal(0);
+        expect(this.board.redCoins).to.equal(0);
 
     }
 
     @test
     public async shouldReturnZeroWhenNoRedCoinsPresent(): Promise<void> {
-        this.cleanStrikeBoard.redCoins = 0;
+        this.board.redCoins = 0;
 
-        const result = this.cleanStrikeBoard.redStrike();
+        const result = this.board.redStrike();
 
         expect(result).to.equal(0);
     }
 
     @test
     public async shouldReturnNegativeOneWhenTheStrikerIsInThePocket(): Promise<void> {
-        const result = this.cleanStrikeBoard.strikerStrike();
+        const result = this.board.strikerStrike();
 
         expect(result).to.equal(-1);
     }
 
     @test
     public async shouldReduceTheNumberOfBlackCoinWhenEncounteredADefunctCoin(): Promise<void> {
-        const result = this.cleanStrikeBoard.defunctStrike();
+        const result = this.board.defunctStrike();
 
         expect(result).to.equal(-2);
-        expect(this.cleanStrikeBoard.blackCoins).to.equal(8);
+        expect(this.board.blackCoins).to.equal(8);
     }
 
     @test
     public async shouldReturnZeroWhenNoBlackCoinsPresentForDefunctStrike(): Promise<void> {
-        this.cleanStrikeBoard.blackCoins = 0;
+        this.board.blackCoins = 0;
 
-        const result = this.cleanStrikeBoard.defunctStrike();
+        const result = this.board.defunctStrike();
 
         expect(result).to.equal(0);
     }
