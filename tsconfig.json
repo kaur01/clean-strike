@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "es6",
+      "dom",
+      "es2016"
+    ],
+    "module": "commonjs",
+    "outDir": "./build/out/",
+    "allowJs": true,
+    "target": "es6",
+    "noEmitOnError": true,
+    "moduleResolution": "node",
+    "noImplicitUseStrict": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
+  "include": [
+    "./src/**/*"
+  ]
+}
