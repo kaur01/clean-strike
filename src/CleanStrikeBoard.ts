@@ -35,4 +35,12 @@ export class CleanStrikeBoard {
         return 2;
     }
 
+    redStrike(): number {
+        if (this._redCoins === 0) {
+            return 0;
+        }
+        this._redCoins = this._redCoins - 1;
+        return 3;
+    }
+
 }

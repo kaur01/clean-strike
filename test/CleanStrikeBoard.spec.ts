@@ -46,5 +46,25 @@ class CleanStrikeBoardSpec {
 
         expect(result).to.equal(0);
     }
+
+    @test
+    public async shouldReduceTheNumberOfRedCoinToZeroWhenRedStrike(): Promise<void> {
+        this.cleanStrikeBoard.redCoins = 1;
+
+        const result = this.cleanStrikeBoard.redStrike();
+
+        expect(result).to.equal(3);
+        expect(this.cleanStrikeBoard.redCoins).to.equal(0);
+
+    }
+
+    @test
+    public async shouldReturnZeroWhenNoRedCoinsPresent(): Promise<void> {
+        this.cleanStrikeBoard.redCoins = 0;
+
+        const result = this.cleanStrikeBoard.redStrike();
+
+        expect(result).to.equal(0);
+    }
 }
 
