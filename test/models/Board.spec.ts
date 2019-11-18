@@ -1,13 +1,13 @@
 import {expect} from 'chai';
 import {suite, test} from 'mocha-typescript';
-import {Board} from "../src/Board";
+import {Board} from "../../src/models/Board";
 
 @suite
 class BoardSpec {
     private board: Board;
 
     public before(): void {
-        this.board = new Board(9,1);
+        this.board = new Board(9, 1);
     }
 
     @test
@@ -76,7 +76,7 @@ class BoardSpec {
 
     @test
     public async shouldReduceTheNumberOfBlackCoinWhenEncounteredADefunctCoin(): Promise<void> {
-        const result = this.board.defunctStrike();
+        const result = this.board.defunct();
 
         expect(result).to.equal(-2);
         expect(this.board.blackCoins).to.equal(8);
@@ -86,7 +86,14 @@ class BoardSpec {
     public async shouldReturnZeroWhenNoBlackCoinsPresentForDefunctStrike(): Promise<void> {
         this.board.blackCoins = 0;
 
-        const result = this.board.defunctStrike();
+        const result = this.board.defunct();
+
+        expect(result).to.equal(0);
+    }
+
+    @test
+    public async shouldReturnZeroWhenTheNoCoinsGoInThePocket(): Promise<void> {
+        const result = this.board.emptyStrike();
 
         expect(result).to.equal(0);
     }

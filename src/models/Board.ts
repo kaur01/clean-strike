@@ -47,7 +47,7 @@ export class Board {
         return -1;
     }
 
-    defunctStrike(): number {
+    defunct(): number {
         if (this._blackCoins === 0) {
             return 0;
         }
@@ -55,4 +55,7 @@ export class Board {
         return -2;
     }
 
+    emptyStrike(): number {
+        return 0;
+    }
 }
