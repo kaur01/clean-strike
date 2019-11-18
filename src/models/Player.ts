@@ -23,12 +23,12 @@ export class Player {
         this._score = value;
     }
 
-    updateScore(newScore: number): number {
-       this._score = this._score + newScore;
-       return this._score;
+    updateScore(newScore: number) {
+        this._score = this._score + newScore;
+        this._score =  this._score < 0 ? 0 : this._score;
     }
 
     updateHistory(move: Move) {
-        throw Error('History not impl');
+       this._gameHistory.push(move);
     }
 }
