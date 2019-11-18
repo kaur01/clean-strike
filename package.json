@@ -19,6 +19,7 @@
     "mocha": "5.2.0",
     "mocha-typescript": "1.1.12",
     "ts-node": "8.0.2",
-    "typescript": "^2.8.4"
+    "typescript": "^2.8.4",
+    "ts-mockito": "latest"
   }
 }
