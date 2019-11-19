@@ -23,7 +23,7 @@ export class PlayerService {
         this.isEqualToThree(count, player);
     }
 
-    checkForThreeFouls(player: Player): void{
+    checkForThreeFouls(player: Player): void {
         let count = 0;
         player.gameHistory.forEach(move => {
             if (player.isStrikerStrike(move) || player.isDefunct(move)) {
@@ -31,6 +31,10 @@ export class PlayerService {
             }
         });
         this.isEqualToThree(count, player);
+    }
+
+    hasFiveOrMorePoints(player: Player): boolean {
+        return player.score >= 5;
     }
 
     private isEqualToThree(count: number, player: Player) {

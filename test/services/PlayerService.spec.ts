@@ -100,4 +100,18 @@ class PlayerServiceSpec {
 
         verify(spiedService.updateScore(player, -1)).never();
     }
+
+    @test
+    public async shouldReturnTrueIfPlayerHasMoreThanFivePoints(): Promise<void> {
+        let player = new Player(8);
+        const result = this.service.hasFiveOrMorePoints(player);
+        expect(result).to.be.true;
+    }
+
+    @test
+    public async shouldReturnFalseIfPlayerDoesNotHaveMoreThanFivePoints(): Promise<void> {
+        let player = new Player(2);
+        const result = this.service.hasFiveOrMorePoints(player);
+        expect(result).to.be.false;
+    }
 }
