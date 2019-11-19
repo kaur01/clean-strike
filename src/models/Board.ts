@@ -18,4 +18,12 @@ export class Board {
     set redCoins(value: number) {
         this._redCoins = value;
     }
+
+    hasBlackCoins(board: Board) {
+        return board.blackCoins === 0;
+    }
+
+    hasRedCoins(board: Board) {
+        return board.redCoins === 0;
+    }
 }
