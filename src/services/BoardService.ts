@@ -1,40 +1,40 @@
 require('reflect-metadata');
 import {injectable} from "inversify";
-import {Board} from "../models/Board";
+import {Board, CoinType} from "../models/Board";
 
 @injectable()
 export class BoardService {
 
 
     strike(board: Board): number {
-        if (board.blackCoins === 0) {
+        if (!board.hasBlackCoins()) {
             return 0;
         }
-        board.blackCoins = board.blackCoins - 1;
+        board.removeCoins(CoinType.BLACK, 1);
         return 1;
     }
 
     multiStrike(board: Board): number {
-        if (board.blackCoins === 0) {
+        if (!board.hasBlackCoins()) {
             return 0;
         }
-        board.blackCoins = board.blackCoins - 2;
+        board.removeCoins(CoinType.BLACK, 2);
         return 2;
     }
 
     redStrike(board: Board): number {
-        if (board.redCoins === 0) {
+        if (!board.hasRedCoins()) {
             return 0;
         }
-        board.redCoins = board.redCoins - 1;
+        board.removeCoins(CoinType.RED, 1);
         return 3;
     }
 
     defunct(board: Board): number {
-        if (board.blackCoins === 0) {
+        if (!board.hasBlackCoins()) {
             return 0;
         }
-        board.blackCoins = board.blackCoins - 1;
+        board.removeCoins(CoinType.BLACK, 1);
         return -2;
     }
 

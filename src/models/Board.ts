@@ -19,11 +19,21 @@ export class Board {
         this._redCoins = value;
     }
 
-    hasBlackCoins(board: Board) {
-        return board.blackCoins === 0;
+    hasBlackCoins() {
+        return this.blackCoins > 0;
     }
 
-    hasRedCoins(board: Board) {
-        return board.redCoins === 0;
+    hasRedCoins() {
+        return this.redCoins > 0;
+    }
+
+    removeCoins(coinType: CoinType, deduction: number): void {
+        coinType === CoinType.BLACK ? this.blackCoins = this.blackCoins - deduction : this.redCoins = this.redCoins - deduction;
     }
 }
+
+export enum CoinType {
+    BLACK = 'black',
+    RED = 'red'
+}
+

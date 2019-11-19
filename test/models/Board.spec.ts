@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {suite, test} from 'mocha-typescript';
-import {Board} from "../../src/models/Board";
+import {Board, CoinType} from "../../src/models/Board";
 
 @suite
 class BoardSpec {
@@ -11,39 +11,53 @@ class BoardSpec {
     }
 
     @test
-    public async shouldReturnFalseIfBoardHasBlackCoins(): Promise<void> {
-        const board = new Board();
+    public async shouldReturnTrueIfBoardHasBlackCoins(): Promise<void> {
 
-        const result = this.board.hasBlackCoins(board);
+        const result = this.board.hasBlackCoins();
+
+        expect(result).to.be.true;
+    }
+
+    @test
+    public async shouldReturnFalseIfBoardDoesNotHaveBlackCoins(): Promise<void> {
+       this.board.blackCoins = 0;
+
+        const result = this.board.hasBlackCoins();
+
+        expect(result).to.be.false;
+    }
+
+
+    @test
+    public async shouldReturnTrueIfBoardHasRedCoins(): Promise<void> {
+
+        const result = this.board.hasRedCoins();
+
+        expect(result).to.be.true;
+    }
+
+    @test
+    public async shouldReturnFalseIfBoardDoesNotHaveRedCoins(): Promise<void> {
+       this.board.redCoins = 0;
+
+        const result = this.board.hasRedCoins();
 
         expect(result).to.be.false;
     }
 
     @test
-    public async shouldReturnTrueIfBoardDoesNotHaveBlackCoins(): Promise<void> {
-        const board = new Board(0);
+    public async shouldRemoveBlackCoins(): Promise<void> {
 
-        const result = this.board.hasBlackCoins(board);
+        this.board.removeCoins(CoinType.BLACK, 2);
 
-        expect(result).to.be.true;
-    }
-
-
-    @test
-    public async shouldReturnFalseIfBoardHasRedCoins(): Promise<void> {
-        const board = new Board();
-
-        const result = this.board.hasRedCoins(board);
-
-        expect(result).to.be.false;
+        expect(this.board.blackCoins).to.equal(7);
     }
 
     @test
-    public async shouldReturnTrueIfBoardDoesNotHaveRedCoins(): Promise<void> {
-        const board = new Board(0,0);
+    public async shouldRemoveRedCoins(): Promise<void> {
 
-        const result = this.board.hasRedCoins(board);
+        this.board.removeCoins(CoinType.RED, 1);
 
-        expect(result).to.be.true;
+        expect(this.board.redCoins).to.equal(0);
     }
 }
