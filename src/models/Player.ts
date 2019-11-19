@@ -1,4 +1,6 @@
-interface Move {
+import {Selection} from "./Selection";
+
+export interface Move {
     score: number;
     selection: string;
 }
@@ -23,12 +25,7 @@ export class Player {
         this._score = value;
     }
 
-    updateScore(newScore: number) {
-        this._score = this._score + newScore;
-        this._score =  this._score < 0 ? 0 : this._score;
-    }
-
-    updateHistory(move: Move) {
-       this._gameHistory.push(move);
+    public isEmptyStrike(move :  Move) {
+        return move.selection === Selection.None;
     }
 }
