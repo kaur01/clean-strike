@@ -27,6 +27,10 @@ export class Board {
         return this.redCoins > 0;
     }
 
+    hasCoins(){
+        return this.hasRedCoins() && this.hasBlackCoins();
+    }
+
     removeCoins(coinType: CoinType, deduction: number): void {
         coinType === CoinType.BLACK ? this.blackCoins = this.blackCoins - deduction : this.redCoins = this.redCoins - deduction;
     }
