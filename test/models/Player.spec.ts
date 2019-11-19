@@ -43,4 +43,11 @@ class PlayerSpec {
         expect(player.score).to.equal(0);
     }
 
+    @test
+    public async shouldUpdatePlayerHistory(): Promise<void> {
+        let player = new Player(0);
+        this.player.updateHistory(player, {score: 0, selection: Selection.RedStrike});
+        expect(player.gameHistory).to.be.of.length(1);
+    }
+
 }

@@ -6,7 +6,7 @@ export interface Move {
 }
 
 export class Player {
-    constructor(private _score: number = 0, private _gameHistory?: Move[]) {
+    constructor(private _score: number = 0, private _gameHistory: Move[] = []) {
     }
 
     get gameHistory(): Move[] {
@@ -33,4 +33,9 @@ export class Player {
         player.score = player.score + newScore;
         player.score = player.score < 0 ? 0 : player.score;
     }
+
+    public updateHistory(player: Player, move: Move) {
+        player.gameHistory.push(move);
+    }
+
 }
