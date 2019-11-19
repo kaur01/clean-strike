@@ -13,16 +13,8 @@ export class Player {
         return this._gameHistory;
     }
 
-    set gameHistory(value: Move[]) {
-        this._gameHistory = value;
-    }
-
     get score(): number {
         return this._score;
-    }
-
-    set score(value: number) {
-        this._score = value;
     }
 
     public isEmptyStrike(move: Move) {
@@ -38,12 +30,16 @@ export class Player {
     }
 
     public updateScore(player: Player, newScore: number) {
-        player.score = player.score + newScore;
-        player.score = player.score < 0 ? 0 : player.score;
+        player._score = player.score + newScore;
+        player._score = player.score < 0 ? 0 : player.score;
     }
 
     public updateHistory(player: Player, move: Move) {
         player.gameHistory.push(move);
+    }
+
+    public isGreaterThanOrEqualToFive(score) {
+        return score >= 5;
     }
 
 }

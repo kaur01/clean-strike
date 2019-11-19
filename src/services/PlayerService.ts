@@ -34,8 +34,9 @@ export class PlayerService {
     }
 
     hasFiveOrMorePoints(player: Player): boolean {
-        return player.score >= 5;
+        return player.isGreaterThanOrEqualToFive(player.score);
     }
+
 
     isDifferenceThreeOrMore(playerOne: Player, playerTwo: Player): boolean|number {
         if (playerOne.score > playerTwo.score) {

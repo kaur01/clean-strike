@@ -74,8 +74,24 @@ class PlayerSpec {
     @test
     public async shouldUpdatePlayerHistory(): Promise<void> {
         let player = new Player(0);
+
         this.player.updateHistory(player, {score: 0, selection: Selection.RedStrike});
+
         expect(player.gameHistory).to.be.of.length(1);
+    }
+
+    @test
+    public async shouldReturnTrueIfScoreGreaterThanFive(): Promise<void> {
+        const result = this.player.isGreaterThanOrEqualToFive(6);
+
+        expect(result).to.be.true;
+    }
+
+    @test
+    public async shouldReturnFalseIfScoreGreaterThanFive(): Promise<void> {
+        const result = this.player.isGreaterThanOrEqualToFive(0);
+
+        expect(result).to.be.false;
     }
 
 }
