@@ -72,4 +72,32 @@ class PlayerServiceSpec {
 
         verify(spiedService.updateScore(player, -1)).never();
     }
+
+    @test
+    public async shouldUpdateScoreWhenThreeFouls(): Promise<void> {
+        const spiedService = spy(this.service);
+        const gameHistory = [{score: 0, selection: Selection.RedStrike},
+            {score: 0, selection: Selection.StrikerStrike}, {score: 0, selection: Selection.RedStrike},
+            {score: 0, selection: Selection.DefunctCoin},
+            {score: 0, selection: Selection.StrikerStrike}];
+        const player = new Player(0, gameHistory);
+
+        this.service.checkForThreeFouls(player);
+
+        verify(spiedService.updateScore(player, -1)).once();
+    }
+
+    @test
+    public async shouldNotUpdateScoreWhenNoThreeFouls(): Promise<void> {
+        const spiedService = spy(this.service);
+        const gameHistory = [{score: 0, selection: Selection.RedStrike},
+            {score: 0, selection: Selection.None}, {score: 0, selection: Selection.RedStrike},
+            {score: 0, selection: Selection.None},
+            {score: 0, selection: Selection.RedStrike}];
+        const player = new Player(0, gameHistory);
+
+        this.service.checkForThreeFouls(player);
+
+        verify(spiedService.updateScore(player, -1)).never();
+    }
 }
