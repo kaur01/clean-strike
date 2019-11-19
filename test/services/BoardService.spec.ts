@@ -101,6 +101,23 @@ class BoardServiceSpec {
 
         expect(result).to.equal(0);
     }
+
+    @test
+    public async shouldReturnTrueIfHasCoins(): Promise<void> {
+        const result = this.boardService.hasCoins(this.board);
+
+        expect(result).to.be.true;
+    }
+
+    @test
+    public async shouldReturnFalseIfHasCoins(): Promise<void> {
+        this.board.redCoins = 0;
+        this.board.blackCoins = 0;
+
+        const result = this.boardService.hasCoins(this.board);
+
+        expect(result).to.be.false;
+    }
 }
 
 

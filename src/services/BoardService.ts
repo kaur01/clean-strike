@@ -38,6 +38,10 @@ export class BoardService {
         return -2;
     }
 
+    hasCoins(board: Board): boolean {
+        return board.hasCoins();
+    }
+
     strikerStrike(): number {
         return -1;
     }
