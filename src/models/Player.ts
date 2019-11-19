@@ -25,8 +25,16 @@ export class Player {
         this._score = value;
     }
 
-    public isEmptyStrike(move :  Move) {
+    public isEmptyStrike(move: Move) {
         return move.selection === Selection.None;
+    }
+
+    public isStrikerStrike(move: Move) {
+        return move.selection === Selection.StrikerStrike;
+    }
+
+    public isDefunct(move: Move) {
+        return move.selection === Selection.DefunctCoin;
     }
 
     public updateScore(player: Player, newScore: number) {

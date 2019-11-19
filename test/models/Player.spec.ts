@@ -26,6 +26,34 @@ class PlayerSpec {
     }
 
     @test
+    public async shouldReturnTrueIfStrikeIsStriker(): Promise<void> {
+        const result = this.player.isStrikerStrike({score: 0, selection: Selection.StrikerStrike});
+
+        expect(result).to.be.true;
+    }
+
+    @test
+    public async shouldReturnFalseIfStrikeIsNotStriker(): Promise<void> {
+        const result = this.player.isStrikerStrike({score: 0, selection: Selection.DefunctCoin});
+
+        expect(result).to.be.false;
+    }
+
+    @test
+    public async shouldReturnTrueIfCoinIsDefunct(): Promise<void> {
+        const result = this.player.isDefunct({score: 0, selection: Selection.DefunctCoin});
+
+        expect(result).to.be.true;
+    }
+
+    @test
+    public async shouldReturnFalseIfCoinIsDefunct(): Promise<void> {
+        const result = this.player.isDefunct({score: 0, selection: Selection.None});
+
+        expect(result).to.be.false;
+    }
+
+    @test
     public async shouldReturnUpdatedPlayerScoreIfIsPositive(): Promise<void> {
         const player = new Player(1);
 
