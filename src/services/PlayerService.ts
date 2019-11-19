@@ -13,7 +13,7 @@ export class PlayerService {
         player.updateHistory(player, move);
     }
 
-    checkForThreeConsecutiveEmptyStrikes(player: Player): void {
+    hasThreeConsecutiveEmptyStrikes(player: Player): void {
         let count = 0;
         player.gameHistory.forEach(move => {
             if (player.isEmptyStrike(move)) {
@@ -23,7 +23,7 @@ export class PlayerService {
         this.isEqualToThree(count, player);
     }
 
-    checkForThreeFouls(player: Player): void {
+    hasThreeFouls(player: Player): void {
         let count = 0;
         player.gameHistory.forEach(move => {
             if (player.isStrikerStrike(move) || player.isDefunct(move)) {
@@ -35,6 +35,16 @@ export class PlayerService {
 
     hasFiveOrMorePoints(player: Player): boolean {
         return player.score >= 5;
+    }
+
+    isDifferenceThreeOrMore(playerOne: Player, playerTwo: Player): boolean|number {
+        if (playerOne.score > playerTwo.score) {
+            return playerOne.score - playerTwo.score >= 3;
+        } else if (playerTwo.score > playerOne.score) {
+            return playerTwo.score - playerOne.score >= 3;
+        } else {
+            return 0;
+        }
     }
 
     private isEqualToThree(count: number, player: Player) {
