@@ -28,4 +28,9 @@ export class Player {
     public isEmptyStrike(move :  Move) {
         return move.selection === Selection.None;
     }
+
+    public updateScore(player: Player, newScore: number) {
+        player.score = player.score + newScore;
+        player.score = player.score < 0 ? 0 : player.score;
+    }
 }
