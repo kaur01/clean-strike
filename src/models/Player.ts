@@ -42,4 +42,8 @@ export class Player {
         return score >= 5;
     }
 
+    public getScore(): number {
+        return this.score;
+    }
+
 }

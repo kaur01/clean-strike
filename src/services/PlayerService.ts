@@ -38,7 +38,7 @@ export class PlayerService {
     }
 
 
-    isDifferenceThreeOrMore(playerOne: Player, playerTwo: Player): boolean|number {
+    isDifferenceThreeOrMore(playerOne: Player, playerTwo: Player): boolean | number {
         if (playerOne.score > playerTwo.score) {
             return playerOne.score - playerTwo.score >= 3;
         } else if (playerTwo.score > playerOne.score) {
@@ -48,9 +48,28 @@ export class PlayerService {
         }
     }
 
-    private isEqualToThree(count: number, player: Player) {
+    getScore(player: Player): number {
+        return player.getScore();
+    }
+
+    highestScorerHasFiveOrMorePoints(playerOne: Player, playerTwo: Player): boolean {
+        const highestScorer = this.hasHighestScorer(playerOne, playerTwo);
+        if (highestScorer) {
+            return this.hasFiveOrMorePoints(highestScorer);
+        }
+    }
+
+    private isEqualToThree(count: number, player: Player): void {
         if (count === 3) {
             this.updateScore(player, -1);
+        }
+    }
+
+    private hasHighestScorer(playerOne: Player, playerTwo: Player): Player {
+        if (playerOne.getScore() > playerTwo.getScore()) {
+            return playerOne;
+        } else if (playerTwo.getScore() > playerOne.getScore()) {
+            return playerTwo;
         }
     }
 }

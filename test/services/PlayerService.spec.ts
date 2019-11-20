@@ -3,7 +3,7 @@ import {suite, test} from 'mocha-typescript';
 import {Selection} from "../../src/models/Selection";
 import {PlayerService} from "../../src/services/PlayerService";
 import {Player} from "../../src/models/Player";
-import {spy, verify} from "ts-mockito";
+import {deepEqual, spy, verify} from "ts-mockito";
 
 @suite
 class PlayerServiceSpec {
@@ -147,5 +147,34 @@ class PlayerServiceSpec {
         const result = this.service.isDifferenceThreeOrMore(playerOne, playerTwo);
 
         expect(result).to.equal(0);
+    }
+
+    @test
+    public async shouldGetScoreForThePlayer(): Promise<void> {
+        const player = new Player(8);
+
+        const score = this.service.getScore(player);
+
+        expect(score).to.equal(player.score);
+    }
+
+    @test
+    public async shouldReturnTrueIfHighestScorerHasMoreThanFivePoints(): Promise<void> {
+        const playerOne = new Player(5);
+        const playerTwo = new Player(0, [{score: 0, selection: Selection.None}]);
+
+        const result = this.service.highestScorerHasFiveOrMorePoints(playerOne, playerTwo);
+
+        expect(result).to.be.true;
+    }
+
+    @test
+    public async shouldReturnFalseIfHighestScorerDoesNotHaveMoreThanFivePoints(): Promise<void> {
+        const playerOne = new Player(4);
+        const playerTwo = new Player(0, [{score: 0, selection: Selection.None}]);
+
+        const result = this.service.highestScorerHasFiveOrMorePoints(playerOne, playerTwo);
+
+        expect(result).to.be.false;
     }
 }

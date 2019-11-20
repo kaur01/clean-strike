@@ -1,6 +1,8 @@
-import {Game} from "./models/Game";
+import {Game} from "./handler/Game";
+import {PlayerService} from "./services/PlayerService";
+import {BoardService} from "./services/BoardService";
 
-console.log("Choose the type of game you want to play?");
-console.log("1. Player1 vs Player2");
-console.log("2. StrikeBot1 vs StrikeBot2");
-const game = new Game();
+console.log("Ready to play?");
+
+const game = new Game(new BoardService(), new PlayerService());
+game.start();
