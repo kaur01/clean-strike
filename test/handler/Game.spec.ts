@@ -81,7 +81,7 @@ class GameSpec {
         this.component.board = new Board();
         this.component.playerOne = new Player(3);
         this.component.currentPlayer = this.component.playerOne;
-        this.component.option = 1;
+        this.component.option = 7;
         when(this.boardService.hasCoins(this.component.board)).thenReturn(true);
 
         this.component.start();

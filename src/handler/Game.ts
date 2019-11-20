@@ -29,18 +29,19 @@ export class Game {
     }
 
     public start() {
-
         while (true) {
             if (!this.boardService.hasCoins(this.board)) {
                 if (!(this.playerService.isDifferenceThreeOrMore(this.playerOne, this.playerTwo) && this.playerService.highestScorerHasFiveOrMorePoints(this.playerOne, this.playerTwo))) {
                     this.message = 'Draw';
+                    console.log(this.message);
                     break;
                 }else if(this.playerService.isDifferenceThreeOrMore(this.playerOne, this.playerTwo) && this.playerService.highestScorerHasFiveOrMorePoints(this.playerOne, this.playerTwo)){
                     this.message = 'Win';
+                    console.log(this.message);
                     break;
                 }
             } else {
-                console.log("Player ", ": Choose an outcome from the list below");
+                console.log("Choose an outcome from the list below");
                 console.log("1. Strike");
                 console.log("2. Multi Strike");
                 console.log("3. Red strike");
@@ -49,13 +50,15 @@ export class Game {
                 console.log("6. None");
                 if(this._option >= 1 && this._option <= 6){
                     this.onSelection(this.currentPlayer);
-                }else{
+                }else {
                     this.message = 'Please enter a value between 1 and 6';
+                    console.log(this.message);
                     break;
                 }
             }
         }
     }
+
 
     onSelection(currentPlayer) {
         if (this._option === 1) {
@@ -80,6 +83,7 @@ export class Game {
             this.updatePlayer(currentPlayer, currentScore, Selection.None);
             this.playerService.hasThreeConsecutiveEmptyStrikes(currentPlayer);
         }
+        this._option = 0;
         this.currentPlayer = this.playerOne ? this.playerTwo : this.playerOne;
     }
 

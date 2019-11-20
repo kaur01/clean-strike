@@ -13,6 +13,10 @@ export class Player {
         return this._gameHistory;
     }
 
+    set gameHistory(value: Move[]) {
+        this._gameHistory = value;
+    }
+
     get score(): number {
         return this._score;
     }

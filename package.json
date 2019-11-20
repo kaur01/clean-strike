@@ -5,7 +5,7 @@
   "scripts": {
     "start": "npm run serve",
     "serve": "node dist/index.js",
-    "build": "npm run build-ts && npm run clean-strike",
+    "build": "npm run build-ts",
     "clean-strike": "ts-node src/index.ts",
     "build-ts": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -23,7 +23,7 @@
     "ts-mockito": "latest"
   },
   "dependencies": {
-    "reflect-metadata": "0.1.8",
-    "inversify": "4.13.0"
+    "inversify": "4.13.0",
+    "reflect-metadata": "0.1.8"
   }
 }
