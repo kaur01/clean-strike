@@ -6,7 +6,15 @@ export interface Move {
 }
 
 export class Player {
-    constructor(private _score: number = 0, private _gameHistory: Move[] = []) {
+    constructor(private _score: number, private _gameHistory: Move[]=[], private _name?: String) {
+    }
+
+    get name(): String {
+        return this._name;
+    }
+
+    set name(value: String) {
+        this._name = value;
     }
 
     get gameHistory(): Move[] {
@@ -33,13 +41,15 @@ export class Player {
         return move.selection === Selection.DefunctCoin;
     }
 
-    public updateScore(player: Player, newScore: number) {
+    public updateScore(player: Player, newScore: number): Player {
         player._score = player.score + newScore;
         player._score = player.score < 0 ? 0 : player.score;
+        return player;
     }
 
-    public updateHistory(player: Player, move: Move) {
+    public updateHistory(player: Player, move: Move): Player {
         player.gameHistory.push(move);
+        return player;
     }
 
     public isGreaterThanOrEqualToFive(score) {

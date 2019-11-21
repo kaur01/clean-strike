@@ -8,7 +8,7 @@ class PlayerSpec {
     private player: Player;
 
     before() {
-        this.player = new Player();
+        this.player = new Player(0);
     }
 
     @test
