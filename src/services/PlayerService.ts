@@ -6,7 +6,7 @@ import {Move, Player} from "../models/Player";
 export class PlayerService {
 
     updateScore(player: Player, newScore: number): Player {
-        return player.updateScore(player, newScore);
+        return player.updateScore(newScore);
     }
 
     updateHistory(player: Player, move: Move): Player {
