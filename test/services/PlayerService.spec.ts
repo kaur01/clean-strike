@@ -1,9 +1,9 @@
 import {expect} from 'chai';
+import {spy, verify} from "ts-mockito";
 import {suite, test} from 'mocha-typescript';
+import {Player} from "../../src/models/Player";
 import {Selection} from "../../src/models/Selection";
 import {PlayerService} from "../../src/services/PlayerService";
-import {Player} from "../../src/models/Player";
-import {deepEqual, spy, verify} from "ts-mockito";
 
 @suite
 class PlayerServiceSpec {

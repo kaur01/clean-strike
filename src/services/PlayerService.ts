@@ -5,12 +5,12 @@ import {Move, Player} from "../models/Player";
 @injectable()
 export class PlayerService {
 
-    updateScore(player: Player, newScore: number): void {
-        player.updateScore(player, newScore);
+    updateScore(player: Player, newScore: number): Player {
+        return player.updateScore(player, newScore);
     }
 
-    updateHistory(player: Player, move: Move): void {
-        player.updateHistory(player, move);
+    updateHistory(player: Player, move: Move): Player {
+        return player.updateHistory(player, move);
     }
 
     hasThreeConsecutiveEmptyStrikes(player: Player): void {
@@ -65,7 +65,7 @@ export class PlayerService {
         }
     }
 
-    private hasHighestScorer(playerOne: Player, playerTwo: Player): Player {
+    public hasHighestScorer(playerOne: Player, playerTwo: Player): Player {
         if (playerOne.getScore() > playerTwo.getScore()) {
             return playerOne;
         } else if (playerTwo.getScore() > playerOne.getScore()) {
