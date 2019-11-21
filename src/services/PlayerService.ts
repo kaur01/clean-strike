@@ -10,12 +10,12 @@ export class PlayerService {
     }
 
     updateHistory(player: Player, move: Move): Player {
-        return player.updateHistory(player, move);
+        return player.updateHistory(move);
     }
 
     hasThreeConsecutiveEmptyStrikes(player: Player): void {
         let count = 0;
-        player.gameHistory.forEach(move => {
+        player.getGameHistory().forEach(move => {
             if (player.isEmptyStrike(move)) {
                 count++;
             }
@@ -25,7 +25,7 @@ export class PlayerService {
 
     hasThreeFouls(player: Player): void {
         let count = 0;
-        player.gameHistory.forEach(move => {
+        player.getGameHistory().forEach(move => {
             if (player.isStrikerStrike(move) || player.isDefunct(move)) {
                 count++;
             }
@@ -34,15 +34,15 @@ export class PlayerService {
     }
 
     hasFiveOrMorePoints(player: Player): boolean {
-        return player.isGreaterThanOrEqualToFive(player.score);
+        return player.isGreaterThanOrEqualToFive(player.getScore());
     }
 
 
     isDifferenceThreeOrMore(playerOne: Player, playerTwo: Player): boolean | number {
-        if (playerOne.score > playerTwo.score) {
-            return playerOne.score - playerTwo.score >= 3;
-        } else if (playerTwo.score > playerOne.score) {
-            return playerTwo.score - playerOne.score >= 3;
+        if (playerOne.getScore() > playerTwo.getScore()) {
+            return playerOne.getScore() - playerTwo.getScore() >= 3;
+        } else if (playerTwo.getScore() > playerOne.getScore()) {
+            return playerTwo.getScore() - playerOne.getScore() >= 3;
         } else {
             return 0;
         }
@@ -59,17 +59,21 @@ export class PlayerService {
         }
     }
 
-    private isEqualToThree(count: number, player: Player): void {
-        if (count === 3) {
-            this.updateScore(player, -1);
-        }
-    }
-
-    public hasHighestScorer(playerOne: Player, playerTwo: Player): Player {
+    hasHighestScorer(playerOne: Player, playerTwo: Player): Player {
         if (playerOne.getScore() > playerTwo.getScore()) {
             return playerOne;
         } else if (playerTwo.getScore() > playerOne.getScore()) {
             return playerTwo;
+        }
+    }
+
+    getName(player: Player): string {
+        return player.getName();
+    }
+
+    private isEqualToThree(count: number, player: Player): void {
+        if (count === 3) {
+            this.updateScore(player, -1);
         }
     }
 }

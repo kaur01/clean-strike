@@ -12,7 +12,6 @@ class BoardSpec {
 
     @test
     public async shouldReturnTrueIfBoardHasBlackCoins(): Promise<void> {
-
         const result = this.board.hasBlackCoins();
 
         expect(result).to.be.true;
@@ -20,9 +19,9 @@ class BoardSpec {
 
     @test
     public async shouldReturnFalseIfBoardDoesNotHaveBlackCoins(): Promise<void> {
-        this.board.blackCoins = 0;
+        const board = new Board(0);
 
-        const result = this.board.hasBlackCoins();
+        const result = board.hasBlackCoins();
 
         expect(result).to.be.false;
     }
@@ -38,9 +37,9 @@ class BoardSpec {
 
     @test
     public async shouldReturnFalseIfBoardDoesNotHaveRedCoins(): Promise<void> {
-        this.board.redCoins = 0;
+        const board = new Board(0,0);
 
-        const result = this.board.hasRedCoins();
+        const result = board.hasRedCoins();
 
         expect(result).to.be.false;
     }
@@ -50,7 +49,7 @@ class BoardSpec {
 
         this.board.removeCoins(CoinType.BLACK, 2);
 
-        expect(this.board.blackCoins).to.equal(7);
+        expect(this.board.getBlackCoins()).to.equal(7);
     }
 
     @test
@@ -58,7 +57,7 @@ class BoardSpec {
 
         this.board.removeCoins(CoinType.RED, 1);
 
-        expect(this.board.redCoins).to.equal(0);
+        expect(this.board.getRedCoins()).to.equal(0);
     }
 
     @test
@@ -70,10 +69,9 @@ class BoardSpec {
 
     @test
     public async shouldReturnFalseIfAnyCoinsPresent(): Promise<void> {
-        this.board.redCoins = 0;
-        this.board.blackCoins = 0;
+        const board = new Board(0,0);
 
-        const result = this.board.hasCoins();
+        const result = board.hasCoins();
 
         expect(result).to.be.false;
     }

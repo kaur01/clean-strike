@@ -16,31 +16,20 @@ class PlayerServiceSpec {
 
     @test
     public async shouldUpdateThePlayersScoreWithTheGivenValue(): Promise<void> {
-        const player = new Player(2);
+        const player = new Player(1,2,[],'name');
 
         this.service.updateScore(player, 2);
 
-        expect(player.score).to.equal(4);
+        expect(player.getScore()).to.equal(4);
     }
 
     @test
     public async shouldReturnZeroIfThePlayersScoreIsInNegatives(): Promise<void> {
-        const player = new Player(1);
+        const player = new Player(1,1,[],'name');
 
         this.service.updateScore(player, -2);
 
-        expect(player.score).to.equal(0);
-    }
-
-    @test
-    public async shouldUpdateHistoryOfThePlayerWithTheGivenMove(): Promise<void> {
-        const player = new Player(0, [])
-        let move = {score: 1, selection: Selection.Strike};
-
-        this.service.updateHistory(player, move);
-
-        expect(player.gameHistory.length).to.equal(1);
-        expect(player.gameHistory[0]).to.deep.equal(move);
+        expect(player.getScore()).to.equal(0);
     }
 
     @test
@@ -52,7 +41,7 @@ class PlayerServiceSpec {
                 selection: Selection.None
             },
             {score: 0, selection: Selection.RedStrike}];
-        const player = new Player(0, gameHistory);
+        const player = new Player(1,0, gameHistory,'name');
 
         this.service.hasThreeConsecutiveEmptyStrikes(player);
 
@@ -66,7 +55,7 @@ class PlayerServiceSpec {
             {score: 0, selection: Selection.None}, {score: 0, selection: Selection.RedStrike},
             {score: 0, selection: Selection.None},
             {score: 0, selection: Selection.RedStrike}];
-        const player = new Player(0, gameHistory);
+        const player = new Player(1,0, gameHistory,'name');
 
         this.service.hasThreeConsecutiveEmptyStrikes(player);
 
@@ -80,7 +69,7 @@ class PlayerServiceSpec {
             {score: 0, selection: Selection.StrikerStrike}, {score: 0, selection: Selection.RedStrike},
             {score: 0, selection: Selection.DefunctCoin},
             {score: 0, selection: Selection.StrikerStrike}];
-        const player = new Player(0, gameHistory);
+        const player = new Player(1,0,[],'name');
 
         this.service.hasThreeFouls(player);
 
@@ -94,7 +83,7 @@ class PlayerServiceSpec {
             {score: 0, selection: Selection.None}, {score: 0, selection: Selection.RedStrike},
             {score: 0, selection: Selection.None},
             {score: 0, selection: Selection.RedStrike}];
-        const player = new Player(0, gameHistory);
+        const player = new Player(1,0,[],'name');
 
         this.service.hasThreeFouls(player);
 
@@ -103,7 +92,7 @@ class PlayerServiceSpec {
 
     @test
     public async shouldReturnTrueIfPlayerHasMoreThanFivePoints(): Promise<void> {
-        const player = new Player(8);
+        const player = new Player(1,8,[],'name');
 
         const result = this.service.hasFiveOrMorePoints(player);
 
@@ -112,7 +101,7 @@ class PlayerServiceSpec {
 
     @test
     public async shouldReturnFalseIfPlayerDoesNotHaveMoreThanFivePoints(): Promise<void> {
-        const player = new Player(2);
+        const player = new Player(1,2,[],'name');
 
         const result = this.service.hasFiveOrMorePoints(player);
 
@@ -121,8 +110,8 @@ class PlayerServiceSpec {
 
     @test
     public async shouldReturnTrueIfDifferenceIsMoreThanThree(): Promise<void> {
-        const playerOne = new Player(5);
-        const playerTwo = new Player(2);
+        const playerOne = new Player(1,5,[],'name');
+        const playerTwo = new Player(1,2,[],'name');
 
         const result = this.service.isDifferenceThreeOrMore(playerOne, playerTwo);
 
@@ -131,8 +120,8 @@ class PlayerServiceSpec {
 
     @test
     public async shouldReturnFalseIfDifferenceIsNotMoreThanThree(): Promise<void> {
-        const playerOne = new Player(4);
-        const playerTwo = new Player(2);
+        const playerOne = new Player(1,4,[],'name');
+        const playerTwo = new Player(1,2,[],'name');
 
         const result = this.service.isDifferenceThreeOrMore(playerOne, playerTwo);
 
@@ -141,8 +130,8 @@ class PlayerServiceSpec {
 
     @test
     public async shouldReturnZeroIfNoDifference(): Promise<void> {
-        const playerOne = new Player(2);
-        const playerTwo = new Player(2);
+        const playerOne = new Player(1,2,[],'name');
+        const playerTwo = new Player(1,2,[],'name');
 
         const result = this.service.isDifferenceThreeOrMore(playerOne, playerTwo);
 
@@ -151,17 +140,17 @@ class PlayerServiceSpec {
 
     @test
     public async shouldGetScoreForThePlayer(): Promise<void> {
-        const player = new Player(8);
+        const player = new Player(1,8,[],'name');
 
         const score = this.service.getScore(player);
 
-        expect(score).to.equal(player.score);
+        expect(score).to.equal(player.getScore());
     }
 
     @test
     public async shouldReturnTrueIfHighestScorerHasMoreThanFivePoints(): Promise<void> {
-        const playerOne = new Player(5);
-        const playerTwo = new Player(0, [{score: 0, selection: Selection.None}]);
+        const playerOne = new Player(1,5,[],'name');
+        const playerTwo = new Player(1,0, [{score: 0, selection: Selection.None}],'name');
 
         const result = this.service.highestScorerHasFiveOrMorePoints(playerOne, playerTwo);
 
@@ -170,8 +159,8 @@ class PlayerServiceSpec {
 
     @test
     public async shouldReturnFalseIfHighestScorerDoesNotHaveMoreThanFivePoints(): Promise<void> {
-        const playerOne = new Player(4);
-        const playerTwo = new Player(0, [{score: 0, selection: Selection.None}]);
+        const playerOne = new Player(1,4,[],'name');
+        const playerTwo = new Player(1,0, [{score: 0, selection: Selection.None}],'name');
 
         const result = this.service.highestScorerHasFiveOrMorePoints(playerOne, playerTwo);
 

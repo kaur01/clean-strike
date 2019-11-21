@@ -8,7 +8,7 @@ class PlayerSpec {
     private player: Player;
 
     before() {
-        this.player = new Player(0);
+        this.player = new Player(1,0,[],'name');
     }
 
     @test
@@ -54,33 +54,6 @@ class PlayerSpec {
     }
 
     @test
-    public async shouldReturnUpdatedPlayerScoreIfIsPositive(): Promise<void> {
-        const player = new Player(1);
-
-        this.player.updateScore(player, 3);
-
-        expect(player.score).to.equal(4);
-    }
-
-    @test
-    public async shouldReturnZeroIfUpdatedPlayerScoreIsNegative(): Promise<void> {
-        const player = new Player(-2);
-
-        this.player.updateScore(player, 1);
-
-        expect(player.score).to.equal(0);
-    }
-
-    @test
-    public async shouldUpdatePlayerHistory(): Promise<void> {
-        let player = new Player(0);
-
-        this.player.updateHistory(player, {score: 0, selection: Selection.RedStrike});
-
-        expect(player.gameHistory).to.be.of.length(1);
-    }
-
-    @test
     public async shouldReturnTrueIfScoreGreaterThanFive(): Promise<void> {
         const result = this.player.isGreaterThanOrEqualToFive(6);
 
@@ -92,6 +65,33 @@ class PlayerSpec {
         const result = this.player.isGreaterThanOrEqualToFive(0);
 
         expect(result).to.be.false;
+    }
+
+    @test
+    public async shouldReturnUpdatedPlayerScoreIfIsPositive(): Promise<void> {
+        const player = new Player(1,1,[],'');
+
+        this.player.updateScore(3);
+
+        expect(player.getScore()).to.equal(4);
+    }
+
+    @test
+    public async shouldReturnZeroIfUpdatedPlayerScoreIsNegative(): Promise<void> {
+        const player = new Player(1,-2,[],'');
+
+        this.player.updateScore( 1);
+
+        expect(player.getScore()).to.equal(0);
+    }
+
+    @test
+    public async shouldUpdatePlayerHistory(): Promise<void> {
+        let player = new Player(1,0,[],'');
+
+        this.player.updateHistory({score: 0, selection: Selection.RedStrike});
+
+        expect(player.getGameHistory()).to.be.of.length(1);
     }
 
 }

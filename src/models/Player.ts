@@ -6,27 +6,19 @@ export interface Move {
 }
 
 export class Player {
-    constructor(private _score: number, private _gameHistory: Move[]=[], private _name?: String) {
+    constructor(private readonly id : number, private score: number, private readonly gameHistory: Move[]=[], private readonly name: string) {
     }
 
-    get name(): String {
-        return this._name;
+    public getScore(): number {
+        return this.score;
     }
 
-    set name(value: String) {
-        this._name = value;
+    public getName(): string {
+        return this.name;
     }
 
-    get gameHistory(): Move[] {
-        return this._gameHistory;
-    }
-
-    set gameHistory(value: Move[]) {
-        this._gameHistory = value;
-    }
-
-    get score(): number {
-        return this._score;
+    public getGameHistory() {
+        return this.gameHistory;
     }
 
     public isEmptyStrike(move: Move) {
@@ -41,23 +33,20 @@ export class Player {
         return move.selection === Selection.DefunctCoin;
     }
 
-    public updateScore(player: Player, newScore: number): Player {
-        player._score = player.score + newScore;
-        player._score = player.score < 0 ? 0 : player.score;
-        return player;
+    public updateScore(newScore: number): Player {
+        this.score = this.score + newScore;
+        this.score = this.score < 0 ? 0 : this.score;
+        return this;
     }
 
-    public updateHistory(player: Player, move: Move): Player {
-        player.gameHistory.push(move);
-        return player;
+    public updateHistory(move: Move): Player {
+        this.gameHistory.push(move);
+        return this;
+
     }
 
     public isGreaterThanOrEqualToFive(score) {
         return score >= 5;
-    }
-
-    public getScore(): number {
-        return this.score;
     }
 
 }
