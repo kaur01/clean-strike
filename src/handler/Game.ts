@@ -34,7 +34,8 @@ export class Game {
                         break;
                     } else if (this.playerService.isDifferenceThreeOrMore(this.playerOne, this.playerTwo) && this.playerService.highestScorerHasFiveOrMorePoints(this.playerOne, this.playerTwo)) {
                         this.message = 'Win';
-                        console.log(this.message);
+                        const highestScorer = this.playerService.hasHighestScorer(this.playerOne,this.playerTwo);
+                        console.log(this.message + highestScorer.getName());
                         break;
                     }
                 } else {
